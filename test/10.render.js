@@ -5,67 +5,67 @@
 /* jshint unused:false */
 
 var assert = require("assert");
-var render = require("../lib/render").render;
+var runtime = require("../lib/render").runtime;
 var TITLE = __filename.replace(/^.*\//, "");
 
 describe(TITLE, function() {
 
   it("text", function() {
-    var t = T => T("Hello, Tustache!");
+    var t = runtime(T => T("Hello, Tustache!"));
 
-    assert.equal(render(t), "Hello, Tustache!");
+    assert.equal(t(), "Hello, Tustache!");
   });
 
   it("variable", function() {
-    var t = T => T("name", 7);
+    var t = runtime(T => T("name", 7));
 
-    assert.equal(render(t, {"name": "Tustache"}), "Tustache");
+    assert.equal(t({"name": "Tustache"}), "Tustache");
   });
 
   it("text and variable", function() {
-    var t = T => "Hello, " + T("name", 7) + "!";
+    var t = runtime(T => "Hello, " + T("name", 7) + "!");
 
-    assert.equal(render(t, {"name": "Tustache"}), "Hello, Tustache!");
-    assert.equal(render(t), "Hello, !");
+    assert.equal(t({"name": "Tustache"}), "Hello, Tustache!");
+    assert.equal(t(), "Hello, !");
   });
 
   it("section", function() {
-    var t = T => T("foo", 11, T => T("FOO")) + T("bar", 11, T => T("BAR"));
+    var t = runtime(T => T("foo", 11, T => T("FOO")) + T("bar", 11, T => T("BAR")));
 
-    assert.equal(render(t, {"foo": true, "bar": false}), "FOO");
-    assert.equal(render(t), "");
+    assert.equal(t({"foo": true, "bar": false}), "FOO");
+    assert.equal(t(), "");
   });
 
   it("inverted section", function() {
-    var t = T => T("foo", 19, T => T("FOO")) + T("bar", 19, T => T("BAR"));
+    var t = runtime(T => T("foo", 19, T => T("FOO")) + T("bar", 19, T => T("BAR")));
 
-    assert.equal(render(t, {"foo": true, "bar": false}), "BAR");
-    assert.equal(render(t), "FOOBAR");
+    assert.equal(t({"foo": true, "bar": false}), "BAR");
+    assert.equal(t(), "FOOBAR");
   });
 
   it("escape", function() {
-    var t = T => T("amp", 7) + "<&>" + T("amp", 3);
+    var t = runtime(T => T("amp", 7) + "<&>" + T("amp", 3));
 
-    assert.equal(render(t, {"amp": "<&>"}), "&lt;&amp;&gt;<&><&>");
-    assert.equal(render(t), "<&>");
+    assert.equal(t({"amp": "<&>"}), "&lt;&amp;&gt;<&><&>");
+    assert.equal(t(), "<&>");
   });
 
   it("deep variable", function() {
-    var t = T => ("[" + T("aa.bb.cc", 7) + "]");
+    var t = runtime(T => ("[" + T("aa.bb.cc", 7) + "]"));
 
-    assert.equal(render(t, {aa: {bb: {cc: "DD"}}}), "[DD]");
-    assert.equal(render(t, {aa: {bb: {}}}), "[]");
-    assert.equal(render(t, {aa: {}}), "[]");
-    assert.equal(render(t), "[]");
+    assert.equal(t({aa: {bb: {cc: "DD"}}}), "[DD]");
+    assert.equal(t({aa: {bb: {}}}), "[]");
+    assert.equal(t({aa: {}}), "[]");
+    assert.equal(t(), "[]");
   });
 
   it("lambda", function() {
-    var t = T => T("aa.bb", 7);
+    var t = runtime(T => T("aa.bb", 7));
 
     var context = {aa: {bb: bb}};
     var alt = {alt: 1};
 
-    assert.equal(render(t, context, alt), "AABB");
+    assert.equal(t(context, alt), "AABB");
 
     function bb(ctx, second) {
       assert.ok(this, context.aa);
@@ -76,11 +76,11 @@ describe(TITLE, function() {
   });
 
   it("partial", function() {
-    var t = T => ("[" + T("foo", 7) + ":" + T("foo", 2) + "]");
+    var t = runtime(T => ("[" + T("foo", 7) + ":" + T("foo", 2) + "]"));
     var context = {foo: "context"};
     var alt = {foo: foo};
 
-    assert.equal(render(t, context, alt), "[context:alt]");
+    assert.equal(t(context, alt), "[context:alt]");
 
     function foo(ctx, second) {
       assert.equal(this, alt);
@@ -91,12 +91,12 @@ describe(TITLE, function() {
   });
 
   it("section and partial", function() {
-    var t = T => ("[ " + T("foo", 11, T => ("[" + T("baz", 2) + "]")) + " ]");
+    var t = runtime(T => ("[ " + T("foo", 11, T => ("[" + T("baz", 2) + "]")) + " ]"));
     var bar = {};
     var context = {foo: [bar, bar], baz: "context"};
     var alt = {baz: baz};
 
-    assert.equal(render(t, context, alt), "[ [alt][alt] ]");
+    assert.equal(t(context, alt), "[ [alt][alt] ]");
 
     function baz(ctx, second) {
       assert.equal(ctx, bar);
@@ -104,5 +104,4 @@ describe(TITLE, function() {
       return "alt";
     }
   });
-
 });
