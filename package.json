@@ -1,0 +1,49 @@
+{
+  "name": "tustache",
+  "description": "Tiny {{Mustache}} Templating Engine",
+  "version": "0.0.0",
+  "author": "@kawanet",
+  "bin": {
+    "tustache": "./bin/tustache.cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/kawanet/tustache/issues"
+  },
+  "dependencies": {
+    "process.argv": "^0.1.0"
+  },
+  "devDependencies": {
+    "browserify": "^16.2.0",
+    "jshint": "^2.9.5",
+    "mocha": "^5.1.1",
+    "uglify-js": "^3.3.22"
+  },
+  "homepage": "https://github.com/kawanet/tustache#readme",
+  "jshintConfig": {
+    "esversion": 6,
+    "globals": {
+      "Promise": true
+    },
+    "mocha": true,
+    "node": true,
+    "undef": true,
+    "unused": true,
+    "validthis": true
+  },
+  "keywords": [
+    "Mustache",
+    "hogan.js"
+  ],
+  "license": "MIT",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kawanet/tustache.git"
+  },
+  "scripts": {
+    "build": "make",
+    "fixpack": "fixpack",
+    "jshint": "./node_modules/.bin/jshint .",
+    "mocha": "./node_modules/.bin/mocha test"
+  }
+}
