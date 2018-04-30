@@ -6,13 +6,13 @@ var runtime = exports.runtime = require("./lib/runtime").runtime;
 
 exports.compile = compile;
 
-function compile(t) {
-  t = parse(t);
+function compile(t, options) {
+  t = parse(t, options);
 
-  t = build(t);
+  t = build(t, options);
 
   /* jshint -W061 */
   t = Function("return " + t)();
 
-  return runtime(t);
+  return runtime(t, options);
 }
