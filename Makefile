@@ -20,7 +20,7 @@ all: $(ALL)
 test: all fetch-specs
 	./node_modules/.bin/mocha test
 	./node_modules/.bin/jshint .
-	$(CLI) test/assets/*.html --runtime | node
+	$(CLI) asset/*.html --runtime | node
 	$(CLI) --help 2>&1 | grep "github.com/kawanet/tustache" > /dev/null
 
 clean:

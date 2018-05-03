@@ -8,8 +8,8 @@ var compile = require("../index").compile;
 var TITLE = __filename.replace(/^.*\//, "");
 
 describe(TITLE, function() {
-  var sample1 = fs.readFileSync(__dirname + "/assets/sample1.html");
-  var sample2 = fs.readFileSync(__dirname + "/assets/sample2.html");
+  var sample1 = fs.readFileSync(__dirname + "/../asset/sample1.html");
+  var sample2 = fs.readFileSync(__dirname + "/../asset/sample2.html");
 
   var context1 = {list: [{name: "foo"}, {name: "bar"}]};
   var context2 = {list: {name: "foo"}};
