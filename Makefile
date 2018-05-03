@@ -27,7 +27,7 @@ clean:
 	/bin/rm -f $(ALL)
 
 $(RUNTIME_OUT): $(RUNTIME_SRC)
-	cat $^ | grep -v '// UGLIFY' | ./node_modules/.bin/uglifyjs --toplevel -m -o $@
+	cat $^ | grep -v '// UGLIFY' | ./node_modules/.bin/uglifyjs --toplevel -m --wrap tustache -o $@
 
 $(MAIN_OUT): $(MAIN_SRC)
 	cat $^ | grep -v ' // UGLIFY' | ./node_modules/.bin/uglifyjs --toplevel -m --wrap tustache -o $@

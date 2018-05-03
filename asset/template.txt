@@ -8,5 +8,5 @@ if (![[variable]]) var [[variable]] = {};
 [[/templates]]
 
 [[#runtime]]
-}((function(t){!function(exports){[[&embed_render]]}(t);return t})({}));
+}((function(tustache){[[&embed_render]]return tustache})({}));
 [[/runtime]]
