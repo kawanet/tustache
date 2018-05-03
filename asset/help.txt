@@ -1,6 +1,7 @@
 USAGE:   tustache [OPTIONS] FILES
 
-OPTIONS: --help                        shows this message
+OPTIONS: --es5                         uses ES5 style function declaration
+         --help                        shows this message
          --namespace=""                prepend string to template names
          --output="templates.js"       outputs JavaScript file
          --tag="{{ }}"                 alternates tag delimiter
