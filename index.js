@@ -1,18 +1,17 @@
 "use strict";
 
-var parse = exports.parse = require("./lib/parse").parse;
-var build = exports.build = require("./lib/build").build;
-var runtime = exports.runtime = require("./lib/runtime").runtime;
-
+exports.parse = require("./lib/parse").parse; // UGLIFY
+exports.build = require("./lib/build").build; // UGLIFY
+exports.runtime = require("./lib/runtime").runtime; // UGLIFY
 exports.compile = compile;
 
 function compile(t, options) {
-  t = parse(t, options);
+  t = exports.parse(t, options);
 
-  t = build(t, options);
+  t = exports.build(t, options);
 
   /* jshint -W061 */
   t = Function("return " + t)();
 
-  return runtime(t, options);
+  return exports.runtime(t, options);
 }

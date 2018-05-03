@@ -1,0 +1,12 @@
+if (![[variable]]) var [[variable]] = {};
+[[#runtime]]
+!function(tustache){
+[[/runtime]]
+
+[[#templates]]
+[[variable]]["[[namespace]][[name]]"] = tustache.runtime([[&code]]);
+[[/templates]]
+
+[[#runtime]]
+}((function(t){!function(exports){[[&embed_render]]}(t);return t})({}));
+[[/runtime]]

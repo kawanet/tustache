@@ -1,5 +1,4 @@
-**/*.browserify.js
 **/*.min.js
 *~
-bin/files
+asset
 node_modules

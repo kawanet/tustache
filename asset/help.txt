@@ -1,0 +1,13 @@
+USAGE:   tustache [OPTIONS] FILES
+
+OPTIONS: --help                        shows this message
+         --namespace=""                prepend string to template names
+         --output="templates.js"       outputs JavaScript file
+         --tag="{{ }}"                 alternates tag delimiter
+         --trim                        removes white spaces
+         --variable="exports"          variable name to export
+
+EXAMPLE: tustache templates.html --verbose
+         tustache ./templates/*.html --output=templates.js --trim --variable=exports
+
+MORE:    [[package.homepage]]
