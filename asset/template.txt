@@ -4,7 +4,7 @@ if (![[variable]]) var [[variable]] = {};
 [[/runtime]]
 
 [[#templates]]
-[[variable]]["[[namespace]][[name]]"] = tustache.runtime([[&code]]);
+[[variable]]["[[namespace]][[name]]"] = tustache.render([[&code]]);
 [[/templates]]
 
 [[#runtime]]

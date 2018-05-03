@@ -3,8 +3,8 @@
 MAIN_OUT=dist/tustache.min.js
 MAIN_SRC=index.js lib/*.js
 
-RUNTIME_OUT=asset/runtime.min.js
-RUNTIME_SRC=lib/runtime.js
+RUNTIME_OUT=dist/tustache-render.min.js
+RUNTIME_SRC=lib/render.js
 
 HELP_OUT=asset/help.js
 HELP_SRC=asset/help.txt

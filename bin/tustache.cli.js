@@ -41,7 +41,7 @@ function CLI(context) {
   });
 
   if (context.runtime) {
-    context.embed_render = fs.readFileSync(__dirname + "/../asset/runtime.min.js");
+    context.embed_render = fs.readFileSync(__dirname + "/../dist/tustache-render.min.js");
   }
 
   const template = tustache.compile(fs.readFileSync(__dirname + "/../asset/template.txt"), {tag: "[[ ]]"});

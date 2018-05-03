@@ -2,7 +2,7 @@
 
 exports.parse = require("./lib/parse").parse; // UGLIFY
 exports.build = require("./lib/build").build; // UGLIFY
-exports.runtime = require("./lib/runtime").runtime; // UGLIFY
+exports.render = require("./lib/render").render; // UGLIFY
 exports.compile = compile;
 
 function compile(t, options) {
@@ -13,5 +13,5 @@ function compile(t, options) {
   /* jshint -W061 */
   t = Function("return " + t)();
 
-  return exports.runtime(t, options);
+  return exports.render(t, options);
 }

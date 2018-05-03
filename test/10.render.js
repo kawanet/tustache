@@ -5,53 +5,53 @@
 /* jshint unused:false */
 
 var assert = require("assert");
-var runtime = require("../lib/runtime").runtime;
+var render = require("../lib/render").render;
 var TITLE = __filename.replace(/^.*\//, "");
 
 describe(TITLE, function() {
 
   it("text", function() {
-    var t = runtime(T => T("Hello, Tustache!"));
+    var t = render(T => T("Hello, Tustache!"));
 
     assert.equal(t(), "Hello, Tustache!");
   });
 
   it("variable", function() {
-    var t = runtime(T => T("name", 7));
+    var t = render(T => T("name", 7));
 
     assert.equal(t({"name": "Tustache"}), "Tustache");
   });
 
   it("text and variable", function() {
-    var t = runtime(T => "Hello, " + T("name", 7) + "!");
+    var t = render(T => "Hello, " + T("name", 7) + "!");
 
     assert.equal(t({"name": "Tustache"}), "Hello, Tustache!");
     assert.equal(t(), "Hello, !");
   });
 
   it("section", function() {
-    var t = runtime(T => T("foo", 11, T => T("FOO")) + T("bar", 11, T => T("BAR")));
+    var t = render(T => T("foo", 11, T => T("FOO")) + T("bar", 11, T => T("BAR")));
 
     assert.equal(t({"foo": true, "bar": false}), "FOO");
     assert.equal(t(), "");
   });
 
   it("inverted section", function() {
-    var t = runtime(T => T("foo", 19, T => T("FOO")) + T("bar", 19, T => T("BAR")));
+    var t = render(T => T("foo", 19, T => T("FOO")) + T("bar", 19, T => T("BAR")));
 
     assert.equal(t({"foo": true, "bar": false}), "BAR");
     assert.equal(t(), "FOOBAR");
   });
 
   it("escape", function() {
-    var t = runtime(T => T("amp", 7) + "<&>" + T("amp", 3));
+    var t = render(T => T("amp", 7) + "<&>" + T("amp", 3));
 
     assert.equal(t({"amp": "<&>"}), "&lt;&amp;&gt;<&><&>");
     assert.equal(t(), "<&>");
   });
 
   it("deep variable", function() {
-    var t = runtime(T => ("[" + T("aa.bb.cc", 7) + "]"));
+    var t = render(T => ("[" + T("aa.bb.cc", 7) + "]"));
 
     assert.equal(t({aa: {bb: {cc: "DD"}}}), "[DD]");
     assert.equal(t({aa: {bb: {}}}), "[]");
@@ -60,7 +60,7 @@ describe(TITLE, function() {
   });
 
   it("lambda", function() {
-    var t = runtime(T => T("aa.bb", 7));
+    var t = render(T => T("aa.bb", 7));
 
     var context = {aa: {bb: bb}};
     var alt = {alt: 1};
@@ -76,7 +76,7 @@ describe(TITLE, function() {
   });
 
   it("partial", function() {
-    var t = runtime(T => ("[" + T("foo", 7) + ":" + T("foo", 2) + "]"));
+    var t = render(T => ("[" + T("foo", 7) + ":" + T("foo", 2) + "]"));
     var context = {foo: "context"};
     var alt = {foo: foo};
 
@@ -91,7 +91,7 @@ describe(TITLE, function() {
   });
 
   it("section and partial", function() {
-    var t = runtime(T => ("[ " + T("foo", 11, T => ("[" + T("baz", 2) + "]")) + " ]"));
+    var t = render(T => ("[ " + T("foo", 11, T => ("[" + T("baz", 2) + "]")) + " ]"));
     var bar = {};
     var context = {foo: [bar, bar], baz: "context"};
     var alt = {baz: baz};
